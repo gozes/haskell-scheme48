@@ -38,12 +38,12 @@ r5rstr =  tab <|> endOfLine
 
 
 
-parseString :: Parser LispVal
-parseString = do
-  withQuates
+parseString :: String -> Parser LispVal
+parseString str = do
+  withQuates str
   s <- many (r5rstr)
   return $ String s
-  where withQuates = between (char '"') (char '"')
+  where withQuates x = between (char '"') (char '"') x
 
 -- parseString = do char '"'
 --                   x <- many $ parseR5RStr
