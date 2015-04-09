@@ -36,13 +36,13 @@ data LispVal = Atom String
 
 r5rstr =  tab <|> endOfLine
 
-withQuates :: Parser a -> Parser a
-withQuates  = between (char '"') (char '"') 
+-- withQuates :: Parser a -> Parser a
+withQuates p  = between (char '"') (char '"') p
 
-parseString :: Parser a ->  Parser LispVal
+-- parseString :: Parser a ->  Parser LispVal
 parseString  = do
-  withQuates
-  s <- many (r5rstr)
+  p <- withQuates
+  s <- (many r5rstr) p
   return $ String s
 
 -- parseString = do char '"'
